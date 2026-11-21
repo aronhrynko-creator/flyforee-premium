@@ -1,5 +1,5 @@
-video/*
-!video/hero.mp4
-!video/hero-start.jpg
+video/
 previz/
 zoom/
+img/hero-off.jpg
+img/hero-on.jpg
