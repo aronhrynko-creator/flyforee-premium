@@ -60,8 +60,8 @@ header.solid .logo img{height:28px}
 
 .prodsec{padding:140px 0 120px}
 .pgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:center}
-.show{position:relative;border-radius:36px;overflow:hidden;background:radial-gradient(90% 80% at 50% 45%,#1a1f2b,#0b0d12 70%);aspect-ratio:1/1.02}
-.show img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain}
+.show{position:relative;border-radius:36px;overflow:hidden;background:#3f424c;aspect-ratio:1/1.02}
+.show img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .show .glow{position:absolute;left:50%;bottom:-25%;width:120%;height:60%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(238,116,23,.35),transparent)}
 .specs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
 .sp{padding:26px 0 24px;border-bottom:1px solid var(--line)}
@@ -96,7 +96,7 @@ header.solid .logo img{height:28px}
 @media(max-width:900px){.cards{grid-template-columns:1fr}}
 .card{background:#fff;border-radius:30px;overflow:hidden;transition:transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .6s}
 .card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(40,30,10,.12)}
-.card .im{aspect-ratio:1/1;background:#0b0d12;overflow:hidden}
+.card .im{aspect-ratio:1/1;background:#2f2f39;overflow:hidden}
 .card .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .card:hover .im img{transform:scale(1.06)}
 .card .tx{padding:24px 26px 28px}
@@ -126,23 +126,32 @@ footer img{height:24px}
 /* FLOW: circles fly in from the sides and become widgets */
 .prodsec,.runs,.line,.why,footer{position:relative}
 .prodsec,.line,.why,footer{background:var(--bg)}
-.flow{position:relative;height:330vh;background:#0c111c}
-.fstage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;background:radial-gradient(120% 90% at 50% 110%,#1b2233 0%,#0c111c 60%)}
+.flow{position:relative;height:400vh;background:#0c111c}
+.fstage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;background:#0c111c}
+.fstage:before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 115%,rgba(255,150,50,.16),transparent 60%);opacity:var(--glow,1);pointer-events:none}
 .fhead{position:absolute;left:0;right:0;top:clamp(84px,11vh,120px);text-align:center;color:#fff;opacity:0}
-.fhead .label{color:rgba(255,255,255,.55)}
+.fhead .label{color:inherit;opacity:.55}
 .fhead h2{font-size:clamp(36px,4.4vw,72px);line-height:1;margin-top:10px}
-.fhead h2 .it{color:#ffc36e}
+.fhead h2 .it{color:var(--amb,#ffc36e)}
 .fgrid{position:absolute;left:50%;transform:translateX(-50%);top:calc(clamp(84px,11vh,120px) + clamp(90px,13vh,150px));width:min(1240px,92vw);display:grid;grid-template-columns:repeat(3,1fr);gap:18px;visibility:hidden}
 .fgrid i{display:block;height:clamp(150px,24vh,230px)}
-.wd{position:absolute;left:0;top:0;border-radius:50%;overflow:hidden;will-change:transform,width,height;color:#fff}
-.wd .fc{position:absolute;inset:0;background:radial-gradient(circle at 35% 30%,#ffd88f,#ee7417 60%,#a8420b);box-shadow:0 0 60px rgba(255,150,40,.55)}
-.wd .gl{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);border-radius:inherit;opacity:0}
-.wd .ct{position:absolute;inset:0;padding:clamp(18px,2.2vw,30px);display:flex;flex-direction:column;justify-content:space-between;opacity:0}
-.wd .num{font-family:"Cormorant Garamond",serif;font-size:clamp(44px,5vw,84px);line-height:.9;color:#ffc36e}
-.wd .num small{font-family:Manrope;font-size:clamp(13px,1.1vw,16px);color:rgba(255,255,255,.7);margin-left:8px;letter-spacing:.02em}
-.wd .tt{font-size:clamp(15px,1.3vw,19px);font-weight:700}
-.wd .tt em{display:block;font-style:normal;font-weight:400;color:rgba(255,255,255,.6);font-size:clamp(12px,1vw,14px);margin-top:3px}
-@media(max-width:760px){.fgrid{grid-template-columns:repeat(2,1fr);gap:12px}.fgrid i{height:clamp(150px,21vh,196px)}.wd .num{font-size:38px}.wd .ct{padding:14px}.wd .tt{font-size:14px}}
+.wd{position:absolute;left:0;top:0;border-radius:50%;will-change:transform,width,height;color:#fff}
+.wd .fc{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 32% 24%,rgba(255,255,255,.62) 0,rgba(255,255,255,.16) 14%,rgba(255,255,255,0) 30%),
+             radial-gradient(circle at 62% 88%,rgba(255,176,80,.75) 0,rgba(255,150,50,.25) 32%,rgba(255,150,50,0) 58%),
+             radial-gradient(circle at 50% 45%,#2b3142 0,#161b27 62%,#0e121b 100%);
+  border:1px solid rgba(255,206,140,.6);
+  box-shadow:inset 0 -14px 26px rgba(255,150,40,.35),inset 0 10px 16px rgba(255,255,255,.10),0 22px 50px rgba(0,0,0,.55),0 0 46px rgba(255,140,40,.28)}
+.wd .fc:after{content:"";position:absolute;left:18%;right:18%;top:7%;height:22%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0))}
+.wd .gl{position:absolute;inset:0;border-radius:inherit;background:var(--card,rgba(255,255,255,.06));border:1px solid var(--cardb,rgba(255,255,255,.14));box-shadow:var(--cards,none);opacity:0;backdrop-filter:blur(6px)}
+.wd .ic{position:absolute;left:0;top:0;width:44px;height:44px;transform-origin:0 0;color:#fff}
+.wd .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wd .ct{position:absolute;inset:0;padding:clamp(18px,2.2vw,30px);padding-top:clamp(64px,7vh,84px);display:flex;flex-direction:column;justify-content:space-between;opacity:0}
+.wd .num{font-family:"Cormorant Garamond",serif;font-size:clamp(44px,4.8vw,80px);line-height:.9;color:var(--amb,#ffc36e)}
+.wd .num small{font-family:Manrope;font-size:clamp(13px,1.1vw,16px);opacity:.7;margin-left:8px;letter-spacing:.02em;color:var(--fg,#fff)}
+.wd .tt{font-size:clamp(15px,1.3vw,19px);font-weight:700;color:var(--fg,#fff)}
+.wd .tt em{display:block;font-style:normal;font-weight:400;opacity:.6;font-size:clamp(12px,1vw,14px);margin-top:3px}
+@media(max-width:760px){.fgrid{grid-template-columns:repeat(2,1fr);gap:12px}.fgrid i{height:clamp(150px,21vh,196px)}.wd .num{font-size:36px}.wd .ct{padding:14px;padding-top:56px}.wd .tt{font-size:14px}}
 </style>
 </head>
 <body>
@@ -170,12 +179,12 @@ footer img{height:24px}
 <section class="flow" id="flow"><div class="fstage">
   <div class="fhead"><div class="label">FLYFOREE LiFePO4</div><h2 class="serif">Світло, яке <span class="it">тримає дім</span></h2></div>
   <div class="fgrid" id="fgrid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="1280">1 280<small>Вт·год</small></div><div class="tt">Енергії в одній коробці<em>FLYFOREE 12V 100Ah</em></div></div></div>
-    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="15">15<small>год</small></div><div class="tt">Холодильник без світла<em>через інвертор, орієнтовно</em></div></div></div>
-    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="6000">6 000<small>циклів</small></div><div class="tt">Роки щоденних відключень<em>LiFePO4 + BMS</em></div></div></div>
-    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="0">0<small>каністр</small></div><div class="tt">Тихо і без вихлопу<em>не генератор</em></div></div></div>
-    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="28">28<small>моделей</small></div><div class="tt">Від 12V до 48V<em>під квартиру і будинок</em></div></div></div>
-    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="11190">11 190<small>грн</small></div><div class="tt">Найдоступніша модель<em>ціни на 21.11.2026</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div class="ct"><div class="num" data-v="1280">1 280<small>Вт·год</small></div><div class="tt">Енергії в одній коробці<em>FLYFOREE 12V 100Ah</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M6 10h12M9 6v2M9 13v3"/></svg></div><div class="ct"><div class="num" data-v="15">15<small>год</small></div><div class="tt">Холодильник без світла<em>через інвертор, орієнтовно</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></div><div class="ct"><div class="num" data-v="6000">6 000<small>циклів</small></div><div class="tt">Роки щоденних відключень<em>LiFePO4 + BMS</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19c8 0 14-6 14-14-8 0-14 6-14 14zM5 19l7-7"/></svg></div><div class="ct"><div class="num" data-v="0">0<small>каністр</small></div><div class="tt">Тихо і без вихлопу<em>не генератор</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="7" rx="1.5"/><rect x="13" y="4" width="8" height="7" rx="1.5"/><rect x="3" y="13" width="8" height="7" rx="1.5"/><rect x="13" y="13" width="8" height="7" rx="1.5"/></svg></div><div class="ct"><div class="num" data-v="28">28<small>моделей</small></div><div class="tt">Від 12V до 48V<em>під квартиру і будинок</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.4"/></svg></div><div class="ct"><div class="num" data-v="11190">11 190<small>грн</small></div><div class="tt">Найдоступніша модель<em>ціни на 21.11.2026</em></div></div></div>
 </div></section>
 
 <section class="prodsec" id="product"><div class="wrap pgrid">
@@ -266,7 +275,7 @@ footer img{height:24px}
 <script>
 (function(){
   const hdr=document.getElementById('hdr'), hero=document.getElementById('hero');
-  const onScroll=()=>{const f=document.getElementById('flow'); const darkEnd=f.offsetTop+f.offsetHeight-80; const pastHero=scrollY>hero.offsetHeight-innerHeight*1.05;
+  const onScroll=()=>{const f=document.getElementById('flow'); const darkEnd=f.offsetTop+(f.offsetHeight-innerHeight)*0.9; const pastHero=scrollY>hero.offsetHeight-innerHeight*1.05;
     hdr.classList.toggle('dark',pastHero&&scrollY<darkEnd); hdr.classList.toggle('solid',scrollY>=darkEnd);};
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   // ---- in-browser camera: nested photos, driven by scroll ----
@@ -311,17 +320,30 @@ footer img{height:24px}
   let tg=[]; const fmt=v=>Math.round(v).toLocaleString('uk-UA').replace(/ /g,' ');
   function measure(){const sr=fst.getBoundingClientRect();tg=cells.map(c=>{const r=c.getBoundingClientRect();return {x:r.left-sr.left,y:r.top-sr.top,w:r.width,h:r.height};});}
   const cl=v=>v<0?0:v>1?1:v, eo=u=>1-Math.pow(1-u,3), eio=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+  const mixc=(c1,c2,t)=>`rgb(${c1.map((v,i)=>Math.round(v+(c2[i]-v)*t)).join(',')})`;
+  const NIGHT=[12,17,28], DAY=[245,242,236];
   function flowDraw(){ if(!tg.length)measure(); const span=flow.offsetHeight-innerHeight; const q=cl(-flow.getBoundingClientRect().top/span);
     const SW=fst.clientWidth, cols=getComputedStyle(document.getElementById('fgrid')).gridTemplateColumns.split(' ').length;
-    fhead.style.opacity=cl((q-0.55)/0.15); fhead.style.transform=`translateY(${(1-cl((q-0.55)/0.15))*24}px)`;
-    wds.forEach((el,i)=>{const T=tg[i]; if(!T)return; const col=i%cols, left=(col===0)||(cols===3&&col===1&&i%2===1)||(cols===2&&col===0);
-      const t1=eo(cl((q-0.02-i*0.035)/0.32)), t2=eio(cl((q-0.40-i*0.025)/0.22)), t3=cl((q-0.60-i*0.02)/0.14);
-      const d=110, tcx=T.x+T.w/2, tcy=T.y+T.h/2, sx=left?-d*1.4:SW+d*1.4, sy=tcy+(i%2?60:-60);
-      const cx=sx+(tcx-sx)*t1, cy=sy+(tcy-sy)*t1-Math.sin(t1*Math.PI)*70, dd=36+(d-36)*t1;
-      const w=dd+(T.w-dd)*t2, h=dd+(T.h-dd)*t2, r=dd/2+(26-dd/2)*t2;
+    const L=eio(cl((q-0.80)/0.18)); // night -> day
+    fst.style.background=mixc(NIGHT,DAY,L); fst.style.setProperty('--glow',1-L);
+    fst.style.setProperty('--fg',mixc([255,255,255],[23,21,15],L)); fst.style.setProperty('--amb',mixc([255,195,110],[217,83,27],L));
+    fst.style.setProperty('--card',`rgba(${Math.round(255*1)},255,255,${(0.06+0.94*L).toFixed(3)})`);
+    fst.style.setProperty('--cardb',`rgba(${Math.round(255-(255-221)*L)},${Math.round(255-(255-214)*L)},${Math.round(255-(255-202)*L)},${(0.14+0.86*L).toFixed(3)})`);
+    fst.style.setProperty('--cards',L>0?`0 20px 50px rgba(40,30,10,${(0.10*L).toFixed(3)})`:'none');
+    const ho=cl((q-0.55)/0.15); fhead.style.opacity=ho; fhead.style.transform=`translateY(${(1-ho)*24}px)`; fhead.style.color=mixc([255,255,255],[23,21,15],L);
+    wds.forEach((el,i)=>{const T=tg[i]; if(!T)return; const col=i%cols, left=cols===3?(col===0||(col===1&&i<3)):(col===0);
+      const t1=eo(cl((q-0.02-i*0.035)/0.30)), t2=eio(cl((q-0.38-i*0.025)/0.20)), t3=cl((q-0.56-i*0.02)/0.13);
+      const d=Math.min(124,T.h*0.62), tcx=T.x+T.w/2, tcy=T.y+T.h/2, sx=left?-d*1.3:SW+d*1.3, sy=tcy+(i%2?70:-70);
+      const cx=sx+(tcx-sx)*t1, cy=sy+(tcy-sy)*t1-Math.sin(t1*Math.PI)*80, dd=40+(d-40)*t1;
+      const w=dd+(T.w-dd)*t2, h=dd+(T.h-dd)*t2, r=dd/2+(24-dd/2)*t2;
       el.style.width=w+'px'; el.style.height=h+'px'; el.style.borderRadius=r+'px';
-      el.style.transform=`translate(${cx-w/2}px,${cy-h/2}px)`; el.style.opacity=t1>0?1:0;
-      el.firstChild.style.opacity=1-t2; el.children[1].style.opacity=t2; const ct=el.children[2]; ct.style.opacity=t3; ct.style.transform=`translateY(${(1-t3)*14}px)`;
+      el.style.transform=`translate(${cx-w/2}px,${cy-h/2}px) rotate(${(1-t1)*(left?-25:25)}deg)`; el.style.opacity=t1>0?1:0;
+      const fc=el.children[0], gl=el.children[1], ic=el.children[2], ct=el.children[3];
+      fc.style.opacity=1-t2; gl.style.opacity=t2;
+      // icon: centred in the orb -> top-left of the card
+      const isz=44, pad=Math.min(26,w*0.12), ix=(w-isz*(0.9))/2*(1-t2)+pad*t2, iy=(h-isz*(0.9))/2*(1-t2)+pad*t2, sc=0.9-0.25*t2;
+      ic.style.transform=`translate(${ix}px,${iy}px) scale(${sc})`; ic.style.color=t2>0.5?getComputedStyle(fst).getPropertyValue('--amb'):'#fff';
+      ct.style.opacity=t3; ct.style.transform=`translateY(${(1-t3)*14}px)`;
       const nm=ct.querySelector('.num'), v=+nm.dataset.v; nm.firstChild.nodeValue=fmt(v*eo(t3))+' '; });
   }
   let ft=false; addEventListener('scroll',()=>{if(!ft){ft=true;requestAnimationFrame(()=>{flowDraw();ft=false;});}},{passive:true});
