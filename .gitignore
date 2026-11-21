@@ -1,0 +1,5 @@
+video/*
+!video/hero.mp4
+!video/hero-start.jpg
+previz/
+zoom/
