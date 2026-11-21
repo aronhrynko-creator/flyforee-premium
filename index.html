@@ -2,7 +2,8 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c111c">
 <title>FLYFOREE — світло, коли навколо темно</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Акумулятори FLYFOREE LiFePO4 для дому під час відключень.">
@@ -15,7 +16,8 @@
 :root{--bg:#f5f2ec;--bg2:#ece7de;--ink:#17150f;--mute:#77716a;--line:#ddd6ca;--acc:#ee7417;--acc2:#d9531b;--night:#0c111c}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;overflow-x:hidden;line-height:1.45;font-variant-numeric:lining-nums}
+html{background:#0c111c}
+body{background:transparent;color:var(--ink);font-family:Manrope,system-ui,sans-serif;overflow-x:hidden;line-height:1.45;font-variant-numeric:lining-nums}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
@@ -33,11 +35,13 @@ nav a:hover{color:var(--acc)}
 .hb{font-size:14px;font-weight:700;padding:11px 20px;border-radius:40px;background:var(--acc);color:#fff}
 header.solid{background:rgba(245,242,236,.88);backdrop-filter:blur(14px);padding:14px 0;box-shadow:0 1px 0 var(--line)}
 header.solid nav{color:var(--ink)}
+header.dark{background:rgba(12,17,28,.72);backdrop-filter:blur(14px);padding:14px 0;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+header.dark .logo img{height:28px}
 header.solid .logo img{height:28px}
 @media(max-width:900px){nav{display:none}.wrap{padding:0 20px}}
 
 .hero{position:relative;height:420vh;background:var(--night)}
-.hstage{position:sticky;top:0;height:100svh;min-height:620px;overflow:hidden}
+.hstage{position:sticky;top:0;height:100vh;height:100lvh;min-height:560px;overflow:hidden}
 #cam{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hint{transition:opacity .4s}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,20,.55) 0%,rgba(6,10,20,.1) 38%,transparent 55%),linear-gradient(90deg,rgba(6,10,20,.45) 0%,transparent 45%)}
@@ -118,6 +122,27 @@ header.solid .logo img{height:28px}
 footer{padding:30px 0;font-size:13px;color:var(--mute)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;align-items:center}
 footer img{height:24px}
+
+/* FLOW: circles fly in from the sides and become widgets */
+.prodsec,.runs,.line,.why,footer{position:relative}
+.prodsec,.line,.why,footer{background:var(--bg)}
+.flow{position:relative;height:330vh;background:#0c111c}
+.fstage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;background:radial-gradient(120% 90% at 50% 110%,#1b2233 0%,#0c111c 60%)}
+.fhead{position:absolute;left:0;right:0;top:clamp(84px,11vh,120px);text-align:center;color:#fff;opacity:0}
+.fhead .label{color:rgba(255,255,255,.55)}
+.fhead h2{font-size:clamp(36px,4.4vw,72px);line-height:1;margin-top:10px}
+.fhead h2 .it{color:#ffc36e}
+.fgrid{position:absolute;left:50%;transform:translateX(-50%);top:calc(clamp(84px,11vh,120px) + clamp(90px,13vh,150px));width:min(1240px,92vw);display:grid;grid-template-columns:repeat(3,1fr);gap:18px;visibility:hidden}
+.fgrid i{display:block;height:clamp(150px,24vh,230px)}
+.wd{position:absolute;left:0;top:0;border-radius:50%;overflow:hidden;will-change:transform,width,height;color:#fff}
+.wd .fc{position:absolute;inset:0;background:radial-gradient(circle at 35% 30%,#ffd88f,#ee7417 60%,#a8420b);box-shadow:0 0 60px rgba(255,150,40,.55)}
+.wd .gl{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);border-radius:inherit;opacity:0}
+.wd .ct{position:absolute;inset:0;padding:clamp(18px,2.2vw,30px);display:flex;flex-direction:column;justify-content:space-between;opacity:0}
+.wd .num{font-family:"Cormorant Garamond",serif;font-size:clamp(44px,5vw,84px);line-height:.9;color:#ffc36e}
+.wd .num small{font-family:Manrope;font-size:clamp(13px,1.1vw,16px);color:rgba(255,255,255,.7);margin-left:8px;letter-spacing:.02em}
+.wd .tt{font-size:clamp(15px,1.3vw,19px);font-weight:700}
+.wd .tt em{display:block;font-style:normal;font-weight:400;color:rgba(255,255,255,.6);font-size:clamp(12px,1vw,14px);margin-top:3px}
+@media(max-width:760px){.fgrid{grid-template-columns:repeat(2,1fr);gap:12px}.fgrid i{height:clamp(150px,21vh,196px)}.wd .num{font-size:38px}.wd .ct{padding:14px}.wd .tt{font-size:14px}}
 </style>
 </head>
 <body>
@@ -140,7 +165,17 @@ footer img{height:24px}
     <div class="cta1 fade"><a class="b1" href="#line">Обрати модель</a><a class="b2" href="#runs">Що він потягне</a></div>
   </div></div>
   <div class="hint">гортайте</div>
-  <div class="toLight" id="toLight"></div>
+</div></section>
+
+<section class="flow" id="flow"><div class="fstage">
+  <div class="fhead"><div class="label">FLYFOREE LiFePO4</div><h2 class="serif">Світло, яке <span class="it">тримає дім</span></h2></div>
+  <div class="fgrid" id="fgrid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="1280">1 280<small>Вт·год</small></div><div class="tt">Енергії в одній коробці<em>FLYFOREE 12V 100Ah</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="15">15<small>год</small></div><div class="tt">Холодильник без світла<em>через інвертор, орієнтовно</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="6000">6 000<small>циклів</small></div><div class="tt">Роки щоденних відключень<em>LiFePO4 + BMS</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="0">0<small>каністр</small></div><div class="tt">Тихо і без вихлопу<em>не генератор</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="28">28<small>моделей</small></div><div class="tt">Від 12V до 48V<em>під квартиру і будинок</em></div></div></div>
+    <div class="wd"><div class="fc"></div><div class="gl"></div><div class="ct"><div class="num" data-v="11190">11 190<small>грн</small></div><div class="tt">Найдоступніша модель<em>ціни на 21.11.2026</em></div></div></div>
 </div></section>
 
 <section class="prodsec" id="product"><div class="wrap pgrid">
@@ -231,7 +266,8 @@ footer img{height:24px}
 <script>
 (function(){
   const hdr=document.getElementById('hdr'), hero=document.getElementById('hero');
-  const onScroll=()=>hdr.classList.toggle('solid',scrollY>hero.offsetHeight-innerHeight*1.05);
+  const onScroll=()=>{const f=document.getElementById('flow'); const darkEnd=f.offsetTop+f.offsetHeight-80; const pastHero=scrollY>hero.offsetHeight-innerHeight*1.05;
+    hdr.classList.toggle('dark',pastHero&&scrollY<darkEnd); hdr.classList.toggle('solid',scrollY>=darkEnd);};
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   // ---- in-browser camera: nested photos, driven by scroll ----
   const IW=2752, rin=(P,b)=>{const k=P[2]/IW;return [P[0]+b[0]*k,P[1]+b[1]*k,b[2]*k,b[3]*k]};
@@ -259,16 +295,37 @@ footer img{height:24px}
     cx.fillStyle='#0c111c';cx.fillRect(0,0,W,H);
     for(const L of LV){ if(!L.c)continue; const [rx,ry,rw,rh]=L.r; const dw=rw*z, dh=rh*z; if(dw<40)continue;
       const ox=(rx-vx)*z, oy=(ry-vy)*z; if(ox>W||oy>H||ox+dw<0||oy+dh<0)continue; cx.drawImage(L.c,ox,oy,dw,dh);} }
-  const htxt=document.querySelector('.htxt'), hint=document.querySelector('.hint'), toL=document.getElementById('toLight');
+  const htxt=document.querySelector('.htxt'), hint=document.querySelector('.hint');
   let shown=false, ticking=false;
   function onS(){ const span=hero.offsetHeight-innerHeight; const p=Math.max(0,Math.min(1,scrollY/span));
     prog=Math.max(0,Math.min(1,(p-0.03)/0.72)); draw();
     hint.style.opacity=p>0.02?0:1;
     if(prog>0.85&&!shown&&window.gsap){shown=true;gsap.to('.hero h1 .ln>span',{yPercent:0,duration:1.2,ease:'power4.out',stagger:.15});gsap.to('.hero .fade',{opacity:1,y:0,duration:.9,stagger:.12,delay:.4});}
-    toL.style.opacity=Math.max(0,Math.min(1,(p-0.9)/0.1)); ticking=false; }
+    ticking=false; }
   addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onS);}},{passive:true});
   addEventListener('resize',()=>{size();onS();});
   size(); onS();
+
+  // ---- FLOW: circles -> widgets ----
+  const flow=document.getElementById('flow'), fst=flow.querySelector('.fstage'), cells=[...document.querySelectorAll('#fgrid i')], wds=[...fst.querySelectorAll('.wd')], fhead=fst.querySelector('.fhead');
+  let tg=[]; const fmt=v=>Math.round(v).toLocaleString('uk-UA').replace(/ /g,' ');
+  function measure(){const sr=fst.getBoundingClientRect();tg=cells.map(c=>{const r=c.getBoundingClientRect();return {x:r.left-sr.left,y:r.top-sr.top,w:r.width,h:r.height};});}
+  const cl=v=>v<0?0:v>1?1:v, eo=u=>1-Math.pow(1-u,3), eio=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+  function flowDraw(){ if(!tg.length)measure(); const span=flow.offsetHeight-innerHeight; const q=cl(-flow.getBoundingClientRect().top/span);
+    const SW=fst.clientWidth, cols=getComputedStyle(document.getElementById('fgrid')).gridTemplateColumns.split(' ').length;
+    fhead.style.opacity=cl((q-0.55)/0.15); fhead.style.transform=`translateY(${(1-cl((q-0.55)/0.15))*24}px)`;
+    wds.forEach((el,i)=>{const T=tg[i]; if(!T)return; const col=i%cols, left=(col===0)||(cols===3&&col===1&&i%2===1)||(cols===2&&col===0);
+      const t1=eo(cl((q-0.02-i*0.035)/0.32)), t2=eio(cl((q-0.40-i*0.025)/0.22)), t3=cl((q-0.60-i*0.02)/0.14);
+      const d=110, tcx=T.x+T.w/2, tcy=T.y+T.h/2, sx=left?-d*1.4:SW+d*1.4, sy=tcy+(i%2?60:-60);
+      const cx=sx+(tcx-sx)*t1, cy=sy+(tcy-sy)*t1-Math.sin(t1*Math.PI)*70, dd=36+(d-36)*t1;
+      const w=dd+(T.w-dd)*t2, h=dd+(T.h-dd)*t2, r=dd/2+(26-dd/2)*t2;
+      el.style.width=w+'px'; el.style.height=h+'px'; el.style.borderRadius=r+'px';
+      el.style.transform=`translate(${cx-w/2}px,${cy-h/2}px)`; el.style.opacity=t1>0?1:0;
+      el.firstChild.style.opacity=1-t2; el.children[1].style.opacity=t2; const ct=el.children[2]; ct.style.opacity=t3; ct.style.transform=`translateY(${(1-t3)*14}px)`;
+      const nm=ct.querySelector('.num'), v=+nm.dataset.v; nm.firstChild.nodeValue=fmt(v*eo(t3))+' '; });
+  }
+  let ft=false; addEventListener('scroll',()=>{if(!ft){ft=true;requestAnimationFrame(()=>{flowDraw();ft=false;});}},{passive:true});
+  addEventListener('resize',()=>{tg=[];flowDraw();}); flowDraw();
   if(!window.gsap||!window.ScrollTrigger){document.querySelectorAll('.hero h1 .ln>span,.hero .fade').forEach(e=>e.style.opacity=1);return;}
   gsap.registerPlugin(ScrollTrigger);
   gsap.set('.hero h1 .ln>span',{yPercent:115}); gsap.set('.hero .fade',{opacity:0,y:18});
