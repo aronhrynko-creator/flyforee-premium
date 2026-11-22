@@ -159,7 +159,7 @@ footer img{height:24px}
 .fhead h2 .it{color:var(--amb,#ffc36e)}
 .fgrid{position:absolute;left:50%;transform:translateX(-50%);top:calc(clamp(84px,11vh,120px) + clamp(90px,13vh,150px));width:min(1240px,92vw);display:grid;grid-template-columns:repeat(3,1fr);gap:18px;visibility:hidden}
 .fgrid i{display:block;height:clamp(150px,24vh,230px)}
-.wd{position:absolute;left:0;top:0;border-radius:50%;will-change:transform,width,height;color:#fff}
+.wd{position:absolute;left:0;top:0;border-radius:50%;will-change:transform;transform-origin:50% 50%;color:#fff}
 .wd .fc{position:absolute;inset:0;border-radius:50%;
   background:radial-gradient(circle at 32% 24%,rgba(255,255,255,.62) 0,rgba(255,255,255,.16) 14%,rgba(255,255,255,0) 30%),
              radial-gradient(circle at 62% 88%,rgba(255,176,80,.75) 0,rgba(255,150,50,.25) 32%,rgba(255,150,50,0) 58%),
@@ -364,16 +364,19 @@ footer img{height:24px}
       const t1=eo(cl((q-0.02-i*0.035)/0.30)), t2=eio(cl((q-0.38-i*0.025)/0.20)), t3=cl((q-0.56-i*0.02)/0.13);
       const d=Math.min(124,T.h*0.62), tcx=T.x+T.w/2, tcy=T.y+T.h/2, sx=left?-d*1.3:SW+d*1.3, sy=tcy+(i%2?70:-70);
       const cx=sx+(tcx-sx)*t1, cy=sy+(tcy-sy)*t1-Math.sin(t1*Math.PI)*80, dd=40+(d-40)*t1;
-      const w=dd+(T.w-dd)*t2, h=dd+(T.h-dd)*t2, r=dd/2+(24-dd/2)*t2;
-      el.style.width=w+'px'; el.style.height=h+'px'; el.style.borderRadius=r+'px';
-      el.style.transform=`translate(${cx-w/2}px,${cy-h/2}px) rotate(${(1-t1)*(left?-25:25)}deg)`; el.style.opacity=t1>0?1:0;
+      // flight: fixed-size orb moved/scaled by transform only (GPU, no relayout); morph: real width/height
+      const fly=t2===0, w=fly?d:d+(T.w-d)*t2, h=fly?d:d+(T.h-d)*t2, r=fly?d/2:d/2+(24-d/2)*t2, k=fly?dd/d:1;
+      const C=el._c||(el._c={}), S=(key,val)=>{if(C[key]!==val){C[key]=val;el.style[key]=val;}};
+      S('width',w.toFixed(1)+'px'); S('height',h.toFixed(1)+'px'); S('borderRadius',r.toFixed(1)+'px');
+      S('transform',`translate3d(${(cx-w/2).toFixed(1)}px,${(cy-h/2).toFixed(1)}px,0) rotate(${((1-t1)*(left?-25:25)).toFixed(2)}deg) scale(${k.toFixed(3)})`); S('opacity',t1>0?'1':'0');
       const hl=el.children[0], fc=el.children[1], gl=el.children[2], ic=el.children[3], ct=el.children[4];
-      fc.style.opacity=1-t2; hl.style.opacity=(1-t2)*(t1>0?1:0); gl.style.opacity=t2;
+      const P=(n,key,val)=>{const c=n._c||(n._c={});if(c[key]!==val){c[key]=val;n.style[key]=val;}};
+      P(fc,'opacity',(1-t2).toFixed(3)); P(hl,'opacity',((1-t2)*(t1>0?1:0)).toFixed(3)); P(gl,'opacity',t2.toFixed(3));
       // icon: centred in the orb -> top-left of the card
       const isz=44, pad=Math.min(26,w*0.12), ix=(w-isz*(0.9))/2*(1-t2)+pad*t2, iy=(h-isz*(0.9))/2*(1-t2)+pad*t2, sc=0.9-0.25*t2;
-      ic.style.transform=`translate(${ix}px,${iy}px) scale(${sc})`; ic.style.color=t2>0.5?ambNow:'#fff';
-      ct.style.opacity=t3; ct.style.transform=`translateY(${(1-t3)*14}px)`;
-      const nm=ct.querySelector('.num'), v=+nm.dataset.v; nm.firstChild.nodeValue=fmt(v*eo(t3))+' '; });
+      P(ic,'transform',`translate3d(${ix.toFixed(1)}px,${iy.toFixed(1)}px,0) scale(${sc.toFixed(3)})`); P(ic,'color',t2>0.5?ambNow:'#fff');
+      P(ct,'opacity',t3.toFixed(3)); P(ct,'transform',`translate3d(0,${((1-t3)*14).toFixed(1)}px,0)`);
+      const nm=el._nm||(el._nm=ct.querySelector('.num')), tx=fmt(+nm.dataset.v*eo(t3))+' '; if(nm.firstChild.nodeValue!==tx)nm.firstChild.nodeValue=tx; });
   }
   // autoplay: once the stage reaches the screen the whole sequence plays to the end by itself (no scroll scrubbing)
   let fq=0, fplay=false, fdone=false; const FDUR=5200;
@@ -389,7 +392,7 @@ footer img{height:24px}
   gsap.registerPlugin(ScrollTrigger);
   // smooth, momentum scrolling: one wheel flick travels further and glides to a stop
   if(window.Lenis && matchMedia('(pointer:fine)').matches){
-    const lenis=new Lenis({lerp:0.06, wheelMultiplier:1.7, smoothWheel:true});
+    const lenis=new Lenis({lerp:0.065, wheelMultiplier:2.3, smoothWheel:true});
     lenis.on('scroll',ScrollTrigger.update);
     gsap.ticker.add(t=>lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0);
     document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id.length>1&&document.querySelector(id)){e.preventDefault();lenis.scrollTo(id,{duration:1.6});}}));
@@ -442,9 +445,9 @@ footer img{height:24px}
       gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.35,y:(e.clientY-r.top-r.height/2)*.45,duration:.5});});
     b.addEventListener('mouseleave',()=>gsap.to(b,{x:0,y:0,duration:.8,ease:'elastic.out(1,.4)'}));
   }
-  // marquee: rows slide in opposite directions with the scroll
-  gsap.fromTo('.mqt:not(.mqb)',{xPercent:0},{xPercent:-50,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:.5}});
-  gsap.fromTo('.mqb',{xPercent:-50},{xPercent:0,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:.5}});
+  // marquee: drifts slowly on its own, all the time (not tied to scrolling)
+  gsap.fromTo('.mqt:not(.mqb)',{xPercent:0},{xPercent:-50,duration:38,ease:'none',repeat:-1});
+  gsap.fromTo('.mqb',{xPercent:-50},{xPercent:0,duration:30,ease:'none',repeat:-1});
   // why: big word drifts, rules draw, numbers count
   gsap.fromTo('.wbg',{xPercent:5},{xPercent:-30,ease:'none',scrollTrigger:{trigger:'.why',start:'top bottom',end:'bottom top',scrub:true}});
   document.querySelectorAll('.wc').forEach((c,i)=>{const r=document.createElement('i');r.className='rule';c.prepend(r);
