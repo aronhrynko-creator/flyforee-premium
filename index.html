@@ -367,7 +367,7 @@ footer img{height:24px}
     g.strokeStyle='rgba(255,206,140,.6)';g.lineWidth=k;g.beginPath();g.arc(m,m,R-k/2,0,7);g.stroke();
     const h=document.createElement('canvas');h.width=h.height=256;const hg=h.getContext('2d'),q=hg.createRadialGradient(128,128,0,128,128,128);
     q.addColorStop(0,'rgba(255,140,40,.32)');q.addColorStop(1,'rgba(255,140,40,0)');hg.fillStyle=q;hg.fillRect(0,0,256,256);
-    fst.style.setProperty('--orb',`url(${c.toDataURL()})`);fst.style.setProperty('--halo',`url(${h.toDataURL()})`);
+    const st=document.createElement('style');st.textContent=`.fstage{--orb:url(${c.toDataURL()});--halo:url(${h.toDataURL()})}`;document.head.appendChild(st); // not inline: fstage's inline style changes every frame
     fst.querySelectorAll('.wd .fc,.wd .halo').forEach(e=>e.classList.add('img'));}catch(e){}})();
   function flowDraw(){ if(!tg.length)measure(); const q=fq;
     const SW=fst.clientWidth, cols=COLS; const ambNow=mixc([255,195,110],[217,83,27],eio(cl((q-0.80)/0.18)));
