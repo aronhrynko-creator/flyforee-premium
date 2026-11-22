@@ -120,6 +120,29 @@ header.solid .logo img{height:28px}
 .cta h2{font-size:clamp(52px,7.6vw,128px);line-height:.92;letter-spacing:-.015em}
 .cta h2 .it{color:#ffc36e}
 .cta .b1{display:inline-block;margin-top:40px;background:var(--acc);color:#fff}
+
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.09em;margin-bottom:-.09em}.w>span{display:inline-block;will-change:transform}
+.show{transform-style:preserve-3d;will-change:transform}
+.chg{position:absolute;left:26px;right:26px;bottom:24px;display:flex;align-items:baseline;gap:6px;color:#fff;padding:16px 20px 22px;border-radius:20px;background:rgba(12,17,28,.55);border:1px solid rgba(255,255,255,.14)}
+.chg span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}.chg span.pc{font-size:18px;letter-spacing:0;opacity:1}
+.chg b{font-family:"Cormorant Garamond",serif;font-size:44px;line-height:.8;margin-left:auto;font-weight:500}
+.chg i{position:absolute;left:20px;right:20px;bottom:12px;height:4px;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden}
+.chg u{position:absolute;inset:0;background:linear-gradient(90deg,#ffc36e,var(--acc));transform-origin:left;transform:scaleX(0);box-shadow:0 0 12px #ffb35a}
+.row{position:relative}.row .bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,#ffc36e,var(--acc2));transform-origin:left;transform:scaleX(0)}
+.row .ic{transition:background .6s,box-shadow .6s}.row .ic svg{transition:stroke .6s}
+.row .ic.lit{background:var(--acc);box-shadow:0 0 0 9px rgba(238,116,23,.14),0 10px 30px rgba(238,116,23,.35)}.row .ic.lit svg{stroke:#fff}
+.mq{position:relative;overflow:hidden;background:var(--night);color:#fff;padding:46px 0 40px;white-space:nowrap}
+.mqt{display:inline-block;font-size:clamp(48px,7vw,110px);line-height:1;will-change:transform}
+.mqt i{font-style:normal;color:var(--acc);margin:0 .25em}
+.mqb{display:block;width:max-content;font-family:Manrope,sans-serif;font-size:clamp(14px,1.3vw,20px);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:18px}
+.card{position:relative}.card:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);pointer-events:none;transition:left .9s cubic-bezier(.2,.7,.2,1)}
+.card:hover:after{left:130%}
+.why{overflow:hidden}.wbg{position:absolute;top:40px;left:0;font-size:24vw;line-height:1;color:var(--bg2);white-space:nowrap;pointer-events:none;will-change:transform}
+.why .wrap{position:relative}
+.wc{border-top:0;position:relative}.wc .rule{position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.wc .n{font-size:64px;line-height:1}
+#sparks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cta .b1{will-change:transform}
 footer{padding:30px 0;font-size:13px;color:var(--mute)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;align-items:center}
 footer img{height:24px}
@@ -127,7 +150,7 @@ footer img{height:24px}
 /* FLOW: circles fly in from the sides and become widgets */
 .prodsec,.runs,.line,.why,footer{position:relative}
 .prodsec,.line,.why,footer{background:var(--bg)}
-.flow{position:relative;height:400vh;background:#0c111c}
+.flow{position:relative;height:230vh;background:#0c111c}
 .fstage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;background:#0c111c}
 .fglow{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 115%,rgba(255,150,50,.16),transparent 60%);pointer-events:none;will-change:opacity}
 .fhead{position:absolute;left:0;right:0;top:clamp(84px,11vh,120px);text-align:center;color:#fff;opacity:0}
@@ -190,7 +213,7 @@ footer img{height:24px}
 </div></section>
 
 <section class="prodsec" id="product"><div class="wrap pgrid">
-  <div class="show"><div class="glow"></div><img src="img/b100.jpg" alt="Акумулятор FLYFOREE LiFePO4 12V 100Ah"></div>
+  <div class="show"><div class="glow"></div><img src="img/b100.jpg" alt="Акумулятор FLYFOREE LiFePO4 12V 100Ah"><div class="chg"><span>Заряд</span><b id="chgv">0</b><span class="pc">%</span><i><u id="chgb"></u></i></div></div>
   <div>
     <div class="label">FLYFOREE LiFePO4 · 12V 100Ah</div>
     <h2 class="ptitle serif">Одна коробка. <span class="it acc">Ціла ніч.</span></h2>
@@ -214,6 +237,8 @@ footer img{height:24px}
   </div>
   <p class="fn">Орієнтовно, для кожного приладу окремо. Залежить від інвертора і моделі техніки.</p>
 </div></section>
+
+<div class="mq" aria-hidden="true"><div class="mqt serif">LiFePO4 <i>·</i> 6 000 циклів <i>·</i> тихо <i>·</i> без вихлопу <i>·</i> Bluetooth <i>·</i> BMS-захист <i>·</i> LiFePO4 <i>·</i> 6 000 циклів <i>·</i> тихо <i>·</i> без вихлопу <i>·</i> Bluetooth <i>·</i> BMS-захист <i>·</i></div><div class="mqt mqb">12V <i>·</i> 24V <i>·</i> 36V <i>·</i> 48V <i>·</i> від 1 280 до 16 077 Вт·год <i>·</i> 12V <i>·</i> 24V <i>·</i> 36V <i>·</i> 48V <i>·</i> від 1 280 до 16 077 Вт·год <i>·</i></div></div>
 
 <section class="line" id="line"><div class="wrap">
   <div class="label">Моделі · ціни на 21.11.2026</div>
@@ -251,7 +276,7 @@ footer img{height:24px}
   </div>
 </div></section>
 
-<section class="why" id="why"><div class="wrap">
+<section class="why" id="why"><div class="wbg serif" aria-hidden="true">LiFePO4</div><div class="wrap">
   <div class="label">Чому LiFePO4</div>
   <h2 class="big serif">Не генератор. <span class="it acc">Краще.</span></h2>
   <div class="wgrid">
@@ -263,7 +288,7 @@ footer img{height:24px}
 
 <section class="cta" id="cta">
   <img src="img/cta.jpg" alt="">
-  <div class="shade"></div>
+  <div class="shade"></div><canvas id="sparks"></canvas>
   <div class="wrap in">
     <h2 class="serif">Наступне відключення<br><span class="it">— без темряви.</span></h2>
     <a class="b1" href="https://flyforee.com.ua">Обрати акумулятор</a>
@@ -326,7 +351,7 @@ footer img{height:24px}
   const mixc=(c1,c2,t)=>`rgb(${c1.map((v,i)=>Math.round(v+(c2[i]-v)*t)).join(',')})`;
   const NIGHT=[12,17,28], DAY=[245,242,236];
   let lastL=-1; const fglow=fst.querySelector('.fglow');
-  function flowDraw(){ if(!tg.length)measure(); const span=flow.offsetHeight-innerHeight; const q=cl(-flow.getBoundingClientRect().top/span);
+  function flowDraw(){ if(!tg.length)measure(); const q=fq;
     const SW=fst.clientWidth, cols=COLS; const ambNow=mixc([255,195,110],[217,83,27],eio(cl((q-0.80)/0.18)));
     const L=eio(cl((q-0.80)/0.18)); // night -> day
     if(L!==lastL){ lastL=L; fst.style.background=mixc(NIGHT,DAY,L); fglow.style.opacity=1-L;
@@ -350,7 +375,14 @@ footer img{height:24px}
       ct.style.opacity=t3; ct.style.transform=`translateY(${(1-t3)*14}px)`;
       const nm=ct.querySelector('.num'), v=+nm.dataset.v; nm.firstChild.nodeValue=fmt(v*eo(t3))+' '; });
   }
-  let ft=false; addEventListener('scroll',()=>{if(!ft){ft=true;requestAnimationFrame(()=>{flowDraw();ft=false;});}},{passive:true});
+  // autoplay: once the stage reaches the screen the whole sequence plays to the end by itself (no scroll scrubbing)
+  let fq=0, fplay=false, fdone=false; const FDUR=5200;
+  function fstart(){ if(fplay||fdone)return; fplay=true; const t0=performance.now()-fq*FDUR;
+    const step=now=>{fq=cl((now-t0)/FDUR); flowDraw(); if(fq<1)requestAnimationFrame(step); else {fplay=false;fdone=true;}}; requestAnimationFrame(step); }
+  function fcheck(){ const r=flow.getBoundingClientRect();
+    if(r.top<innerHeight*0.25 && r.bottom>0) fstart();
+    else if(r.top>innerHeight && !fplay && fq>0){ fq=0; fdone=false; flowDraw(); } } // scrolled back above: replay next time
+  addEventListener('scroll',fcheck,{passive:true}); fcheck();
   addEventListener('resize',()=>{tg=[];flowDraw();}); flowDraw();
   if(!window.gsap||!window.ScrollTrigger){document.querySelectorAll('.hero h1 .ln>span,.hero .fade').forEach(e=>e.style.opacity=1);return;}
   gsap.registerPlugin(ScrollTrigger);
@@ -378,12 +410,50 @@ footer img{height:24px}
   gsap.utils.toArray('.row').forEach(r=>{
     gsap.from(r,{opacity:0,y:40,duration:.9,ease:'power3.out',scrollTrigger:{trigger:r,start:'top 88%'}});
     count(r.querySelector('[data-n]'),r);
+    const bar=document.createElement('i');bar.className='bar';r.appendChild(bar); const ic=r.querySelector('.ic');
+    gsap.to(bar,{scaleX:1,duration:1.6,ease:'power2.out',scrollTrigger:{trigger:r,start:'top 80%'},onComplete:()=>ic.classList.add('lit')});
   });
-  gsap.utils.toArray('h2.big').forEach(e=>gsap.from(e,{opacity:0,y:50,duration:1,ease:'power3.out',scrollTrigger:{trigger:e,start:'top 88%'}}));
   ScrollTrigger.batch('.card',{start:'top 92%',onEnter:b=>gsap.from(b,{opacity:0,y:50,duration:.8,stagger:.06,ease:'power3.out'}),once:true});
   gsap.from('.wc',{opacity:0,y:50,duration:1,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'.wgrid',start:'top 82%'}});
   gsap.fromTo('.cta>img',{scale:1.15},{scale:1,ease:'none',scrollTrigger:{trigger:'.cta',start:'top bottom',end:'bottom bottom',scrub:true}});
-  gsap.from('.cta h2,.cta .b1',{opacity:0,y:60,duration:1.1,stagger:.15,scrollTrigger:{trigger:'.cta',start:'top 55%'}});
+  // word-by-word masked reveal for section headings
+  const split=el=>{[...el.childNodes].forEach(n=>{ if(n.nodeType===3){ const f=document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(w=>{ if(!w)return; if(/^\s+$/.test(w)){f.appendChild(document.createTextNode(w));return;}
+        const o=document.createElement('span');o.className='w';const i=document.createElement('span');i.textContent=w;o.appendChild(i);f.appendChild(o);});
+      n.replaceWith(f);} else if(n.nodeType===1&&n.tagName!=='BR') split(n); });};
+  document.querySelectorAll('h2.big,.ptitle,.cta h2').forEach(h=>{split(h);
+    gsap.from(h.querySelectorAll('.w>span'),{yPercent:115,rotate:4,duration:1.1,stagger:.07,ease:'power4.out',scrollTrigger:{trigger:h,start:'top 86%'}});});
+  gsap.from('.cta .b1',{opacity:0,y:40,duration:1,delay:.4,scrollTrigger:{trigger:'.cta',start:'top 55%'}});
+
+  // product: battery charges 0 -> 100 % while the section passes
+  const chg={v:0}; gsap.to(chg,{v:100,ease:'none',scrollTrigger:{trigger:'.prodsec',start:'top 70%',end:'center 40%',scrub:.8},
+    onUpdate(){document.getElementById('chgv').textContent=Math.round(chg.v);document.getElementById('chgb').style.transform=`scaleX(${chg.v/100})`;}});
+  gsap.to('.show .glow',{opacity:.45,scale:1.15,duration:2.4,repeat:-1,yoyo:true,ease:'sine.inOut'});
+  if(matchMedia('(pointer:fine)').matches){ const sh=document.querySelector('.show');
+    sh.addEventListener('mousemove',e=>{const r=sh.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      gsap.to(sh,{rotateY:x*10,rotateX:-y*10,transformPerspective:1100,duration:.7,ease:'power2.out'});});
+    sh.addEventListener('mouseleave',()=>gsap.to(sh,{rotateY:0,rotateX:0,duration:1,ease:'power3.out'}));
+    const b=document.querySelector('.cta .b1'); b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();
+      gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.35,y:(e.clientY-r.top-r.height/2)*.45,duration:.5});});
+    b.addEventListener('mouseleave',()=>gsap.to(b,{x:0,y:0,duration:.8,ease:'elastic.out(1,.4)'}));
+  }
+  // marquee: rows slide in opposite directions with the scroll
+  gsap.fromTo('.mqt:not(.mqb)',{xPercent:0},{xPercent:-50,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:.5}});
+  gsap.fromTo('.mqb',{xPercent:-50},{xPercent:0,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:.5}});
+  // why: big word drifts, rules draw, numbers count
+  gsap.fromTo('.wbg',{xPercent:5},{xPercent:-30,ease:'none',scrollTrigger:{trigger:'.why',start:'top bottom',end:'bottom top',scrub:true}});
+  document.querySelectorAll('.wc').forEach((c,i)=>{const r=document.createElement('i');r.className='rule';c.prepend(r);
+    gsap.to(r,{scaleX:1,duration:1.2,delay:i*.15,ease:'power3.inOut',scrollTrigger:{trigger:'.wgrid',start:'top 82%'}});});
+  // cta: warm dust motes drifting up through the light
+  (()=>{const c=document.getElementById('sparks'),g=c.getContext('2d');let on=false,P=[];
+    const rs=()=>{const d=Math.min(devicePixelRatio||1,1.5);c.width=c.clientWidth*d;c.height=c.clientHeight*d;};
+    const mk=()=>({x:Math.random()*c.width,y:c.height*(0.3+Math.random()*0.8),r:(0.6+Math.random()*2.2)*(c.width/1400),s:0.15+Math.random()*0.5,a:Math.random()*6.28,o:0.2+Math.random()*0.6});
+    const loop=()=>{if(!on)return;g.clearRect(0,0,c.width,c.height);
+      P.forEach(p=>{p.y-=p.s*(c.width/1400);p.a+=0.01;p.x+=Math.sin(p.a)*0.3;if(p.y<-10)Object.assign(p,mk(),{y:c.height+10});
+        g.globalAlpha=p.o*(0.6+0.4*Math.sin(p.a*3));g.fillStyle='#ffc36e';g.beginPath();g.arc(p.x,p.y,p.r,0,6.28);g.fill();});
+      requestAnimationFrame(loop);};
+    new IntersectionObserver(es=>{on=es[0].isIntersecting;if(on){if(!P.length){rs();P=Array.from({length:70},mk);}requestAnimationFrame(loop);}}).observe(c);
+    addEventListener('resize',()=>{if(P.length)rs();});})();
 })();
 </script>
 </body>
