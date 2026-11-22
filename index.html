@@ -169,7 +169,6 @@ footer img{height:24px}
 .wd .halo{position:absolute;left:50%;top:50%;width:180%;height:180%;margin:-90% 0 0 -90%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,140,40,.32),rgba(255,140,40,0));pointer-events:none;will-change:opacity}
 .wd .fc:after{content:"";position:absolute;left:18%;right:18%;top:7%;height:22%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0))}
 .wd .gl{position:absolute;inset:0;border-radius:inherit;background:var(--card,rgba(255,255,255,.06));border:1px solid var(--cardb,rgba(255,255,255,.14));box-shadow:var(--cards,none);opacity:0}
-.wd .fc.img{background:var(--orb) center/100% 100% no-repeat;border:0;box-shadow:none}.wd .fc.img:after{display:none}.wd .halo.img{background:var(--halo) center/100% 100% no-repeat}
 .wd .ic{position:absolute;left:0;top:0;width:44px;height:44px;transform-origin:0 0;color:#fff}
 .wd .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .wd .ct{position:absolute;inset:0;padding:clamp(18px,2.2vw,30px);padding-top:clamp(64px,7vh,84px);display:flex;flex-direction:column;justify-content:space-between;opacity:0}
@@ -352,23 +351,6 @@ footer img{height:24px}
   const mixc=(c1,c2,t)=>`rgb(${c1.map((v,i)=>Math.round(v+(c2[i]-v)*t)).join(',')})`;
   const NIGHT=[12,17,28], DAY=[245,242,236];
   let lastL=-1; const fglow=fst.querySelector('.fglow');
-  // the glass orb and its halo are pre-painted once into bitmaps: moving/scaling a bitmap is cheap,
-  // repainting 6 multi-gradient + inset-shadow circles every frame is what made the flight stutter
-  (()=>{try{const S=320,k=S/124,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d'),m=S/2,R=m-1;
-    const rg=(x,y,r,st)=>{const q=g.createRadialGradient(x*S,y*S,0,x*S,y*S,r*S);st.forEach(([o,col])=>q.addColorStop(o,col));return q;};
-    g.save();g.beginPath();g.arc(m,m,R,0,7);g.clip();
-    g.fillStyle=rg(.5,.45,.743,[[0,'#2b3142'],[.62,'#161b27'],[1,'#0e121b']]);g.fillRect(0,0,S,S);
-    g.fillStyle=rg(.62,.88,1.076,[[0,'rgba(255,176,80,.75)'],[.32,'rgba(255,150,50,.25)'],[.58,'rgba(255,150,50,0)']]);g.fillRect(0,0,S,S);
-    g.fillStyle=rg(.32,.24,1.02,[[0,'rgba(255,255,255,.62)'],[.14,'rgba(255,255,255,.16)'],[.30,'rgba(255,255,255,0)']]);g.fillRect(0,0,S,S);
-    const inset=(col,blur,oy)=>{g.save();g.shadowColor=col;g.shadowBlur=blur*k;g.shadowOffsetY=oy*k;g.fillStyle='#000';g.beginPath();g.rect(-S,-S,3*S,3*S);g.arc(m,m,R,0,7,true);g.fill();g.restore();};
-    inset('rgba(255,150,40,.35)',22,-12); inset('rgba(255,255,255,.10)',14,8);
-    const lg=g.createLinearGradient(0,.07*S,0,.29*S);lg.addColorStop(0,'rgba(255,255,255,.35)');lg.addColorStop(1,'rgba(255,255,255,0)');
-    g.fillStyle=lg;g.beginPath();g.ellipse(m,.18*S,.32*S,.11*S,0,0,7);g.fill();g.restore();
-    g.strokeStyle='rgba(255,206,140,.6)';g.lineWidth=k;g.beginPath();g.arc(m,m,R-k/2,0,7);g.stroke();
-    const h=document.createElement('canvas');h.width=h.height=256;const hg=h.getContext('2d'),q=hg.createRadialGradient(128,128,0,128,128,128);
-    q.addColorStop(0,'rgba(255,140,40,.32)');q.addColorStop(1,'rgba(255,140,40,0)');hg.fillStyle=q;hg.fillRect(0,0,256,256);
-    const st=document.createElement('style');st.textContent=`.fstage{--orb:url(${c.toDataURL()});--halo:url(${h.toDataURL()})}`;document.head.appendChild(st); // not inline: fstage's inline style changes every frame
-    fst.querySelectorAll('.wd .fc,.wd .halo').forEach(e=>e.classList.add('img'));}catch(e){}})();
   function flowDraw(){ if(!tg.length)measure(); const q=fq;
     const SW=fst.clientWidth, cols=COLS; const ambNow=mixc([255,195,110],[217,83,27],eio(cl((q-0.80)/0.18)));
     const L=eio(cl((q-0.80)/0.18)); // night -> day
@@ -454,7 +436,8 @@ footer img{height:24px}
   // product: battery charges 0 -> 100 % while the section passes
   const chg={v:0}; gsap.to(chg,{v:100,ease:'none',scrollTrigger:{trigger:'.prodsec',start:'top 70%',end:'center 40%',scrub:.8},
     onUpdate(){document.getElementById('chgv').textContent=Math.round(chg.v);document.getElementById('chgb').style.transform=`scaleX(${chg.v/100})`;}});
-  gsap.to('.show .glow',{opacity:.45,scale:1.15,duration:2.4,repeat:-1,yoyo:true,ease:'sine.inOut'});
+  const pulse=gsap.to('.show .glow',{opacity:.45,scale:1.15,duration:2.4,repeat:-1,yoyo:true,ease:'sine.inOut',paused:true});
+  ScrollTrigger.create({trigger:'.prodsec',start:'top bottom',end:'bottom top',onToggle:st=>st.isActive?pulse.play():pulse.pause()});
   if(matchMedia('(pointer:fine)').matches){ const sh=document.querySelector('.show');
     sh.addEventListener('mousemove',e=>{const r=sh.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
       gsap.to(sh,{rotateY:x*10,rotateX:-y*10,transformPerspective:1100,duration:.7,ease:'power2.out'});});
@@ -464,8 +447,10 @@ footer img{height:24px}
     b.addEventListener('mouseleave',()=>gsap.to(b,{x:0,y:0,duration:.8,ease:'elastic.out(1,.4)'}));
   }
   // marquee: drifts slowly on its own, all the time (not tied to scrolling)
-  gsap.fromTo('.mqt:not(.mqb)',{xPercent:0},{xPercent:-50,duration:38,ease:'none',repeat:-1});
-  gsap.fromTo('.mqb',{xPercent:-50},{xPercent:0,duration:30,ease:'none',repeat:-1});
+  // runs only while visible, so it never steals frames from the rest of the page
+  const mq1=gsap.fromTo('.mqt:not(.mqb)',{xPercent:0},{xPercent:-50,duration:38,ease:'none',repeat:-1,paused:true});
+  const mq2=gsap.fromTo('.mqb',{xPercent:-50},{xPercent:0,duration:30,ease:'none',repeat:-1,paused:true});
+  ScrollTrigger.create({trigger:'.mq',start:'top bottom',end:'bottom top',onToggle:st=>{[mq1,mq2].forEach(t=>st.isActive?t.play():t.pause());}});
   // why: big word drifts, rules draw, numbers count
   gsap.fromTo('.wbg',{xPercent:5},{xPercent:-30,ease:'none',scrollTrigger:{trigger:'.why',start:'top bottom',end:'bottom top',scrub:true}});
   document.querySelectorAll('.wc').forEach((c,i)=>{const r=document.createElement('i');r.className='rule';c.prepend(r);
